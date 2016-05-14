@@ -1,0 +1,201 @@
+﻿<#@ template language="c#" HostSpecific="True" #>
+<#@ output extension= ".cs" #>
+<#
+	TableHost host = (TableHost)(Host);		
+	string ModelSpace = host.NameSpace+".Model."+ host.GetModelClass(host.TableName);
+	string DALSpace= host.NameSpace+".DAL."+ host.GetDALClass(host.TableName);
+	ColumnInfo identityKey=host.IdentityKey;
+	string returnValue = "void";
+    if (identityKey!=null)
+    {         
+         returnValue = CodeCommon.DbTypeToCS(identityKey.TypeName);              
+    }
+#>
+using System; 
+using System.Data;
+using System.Collections.Generic; 
+using Maticsoft.Common;
+using Maticsoft.Model;
+using Maticsoft.DALFactory;
+using Maticsoft.IDAL;
+namespace <#= host.NameSpace #>.BLL <# if( host.Folder.Length > 0){ #>.<#= host.Folder #><# } #>
+{
+	<# if( host.TableDescription.Length > 0) {#>
+ 	//<#= host.TableDescription #>
+	<# } #>
+	public partial class <#= host.GetBLLClass(host.TableName) #>
+	{
+		private readonly I<#= host.GetBLLClass(host.TableName) #> dal=DataAccess.Create<#= host.GetBLLClass(host.TableName) #>();
+		public <#= host.GetBLLClass(host.TableName) #>()
+		{}
+		
+		#region  Method
+		/// <summary>
+		/// 是否存在该记录
+		/// </summary>
+		public bool Exists(<#= CodeCommon.GetInParameter(host.Keys, false) #>)
+		{
+			return dal.Exists(<#= CodeCommon.GetFieldstrlist(host.Keys, false)#>);
+		}
+
+		/// <summary>
+		/// 增加一条数据
+		/// </summary>
+		public <#= returnValue #>  Add(<#= ModelSpace #> model)
+		{
+			<#if (identityKey!=null) {#>return dal.Add(model);
+			<#} else {#>dal.Add(model);
+			<#}#>			
+		}
+
+		/// <summary>
+		/// 更新一条数据
+		/// </summary>
+		public bool Update(<#= ModelSpace #> model)
+		{
+			return dal.Update(model);
+		}
+
+		/// <summary>
+		/// 删除一条数据
+		/// </summary>
+		public bool Delete(<#=CodeCommon.GetInParameter(host.Keys, true)#>)
+		{
+			
+			return dal.Delete(<#=CodeCommon.GetFieldstrlist(host.Keys, true)#>);
+		}
+		<#if (identityKey!=null) {#>
+		/// <summary>
+		/// 批量删除一批数据
+		/// </summary>
+		public bool DeleteList(string <#=identityKey.ColumnName#>list )
+		{
+			return dal.DeleteList(<#=identityKey.ColumnName#>list );
+		}
+		<#}#>
+
+		/// <summary>
+		/// 得到一个对象实体
+		/// </summary>
+		public <#= ModelSpace #> GetModel(<#= CodeCommon.GetInParameter(host.Keys,true) #>)
+		{
+			
+			return dal.GetModel(<#=CodeCommon.GetFieldstrlist(host.Keys, true)#>);
+		}
+
+		/// <summary>
+		/// 得到一个对象实体，从缓存中
+		/// </summary>
+		public <#= ModelSpace #> GetModelByCache(<#= CodeCommon.GetInParameter(host.Keys,true) #>)
+		{
+			
+			string CacheKey = "<#= host.TableName #>Model-" + <#=CodeCommon.GetFieldstrlistAdd(host.Keys, true)#>;
+			object objModel = Maticsoft.Common.DataCache.GetCache(CacheKey);
+			if (objModel == null)
+			{
+				try
+				{
+					objModel = dal.GetModel(<#=CodeCommon.GetFieldstrlist(host.Keys, true)#>);
+					if (objModel != null)
+					{
+						int ModelCache = Maticsoft.Common.ConfigHelper.GetConfigInt("ModelCache");
+						Maticsoft.Common.DataCache.SetCache(CacheKey, objModel, DateTime.Now.AddMinutes(ModelCache), TimeSpan.Zero);
+					}
+				}
+				catch{}
+			}
+			return (<#= ModelSpace #>)objModel;
+		}
+
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		public DataSet GetList(string strWhere)
+		{
+			return dal.GetList(strWhere);
+		}
+		/// <summary>
+		/// 获得前几行数据
+		/// </summary>
+		public DataSet GetList(int Top,string strWhere,string filedOrder)
+		{
+			return dal.GetList(Top,strWhere,filedOrder);
+		}
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		public List<<#= ModelSpace #>> GetModelList(string strWhere)
+		{
+			DataSet ds = dal.GetList(strWhere);
+			return DataTableToList(ds.Tables[0]);
+		}
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		public List<<#= ModelSpace #>> DataTableToList(DataTable dt)
+		{
+			List<<#= ModelSpace #>> modelList = new List<<#= ModelSpace #>>();
+			int rowsCount = dt.Rows.Count;
+			if (rowsCount > 0)
+			{
+				<#= ModelSpace #> model;
+				for (int n = 0; n < rowsCount; n++)
+				{
+					model = new <#= ModelSpace #>();					
+					<# foreach (ColumnInfo c in host.Fieldlist) { #>
+				<# if(CodeCommon.DbTypeToCS(c.TypeName)=="int"||
+				CodeCommon.DbTypeToCS(c.TypeName)=="long"||
+				CodeCommon.DbTypeToCS(c.TypeName)=="float"||
+				CodeCommon.DbTypeToCS(c.TypeName)=="DateTime"||
+				CodeCommon.DbTypeToCS(c.TypeName)=="decimal")
+				{#>if(dt.Rows[n]["<#=c.ColumnName#>"].ToString()!="")
+				{
+					model.<#=c.ColumnName#>=<#=CodeCommon.DbTypeToCS(c.TypeName)#>.Parse(dt.Rows[n]["<#=c.ColumnName#>"].ToString());
+				}
+				<# } #><# if(CodeCommon.DbTypeToCS(c.TypeName)=="string") {#>
+				model.<#=c.ColumnName#>= dt.Rows[n]["<#=c.ColumnName#>"].ToString();
+				<# } #>
+				<# if(CodeCommon.DbTypeToCS(c.TypeName)=="byte[]") {#>
+				if(dt.Rows[n]["<#=c.ColumnName#>"].ToString()!="")
+				{
+					model.<#=c.ColumnName#>= (byte[])dt.Rows[n]["<#=c.ColumnName#>"];
+				}
+				<# } #>
+				<# if(CodeCommon.DbTypeToCS(c.TypeName)=="Guid") {#>
+				if(dt.Rows[n]["<#=c.ColumnName#>"].ToString()!="")
+				{
+					model.<#=c.ColumnName#>= dt.Rows[n]["<#=c.ColumnName#>"].ToString();
+				}
+				<# } #>
+				<# if(CodeCommon.DbTypeToCS(c.TypeName)=="bool") {#>
+				if(dt.Rows[n]["<#=c.ColumnName#>"].ToString()!="")
+				{
+					if((dt.Rows[n]["<#=c.ColumnName#>"].ToString()=="1")||(dt.Rows[n]["<#=c.ColumnName#>"].ToString().ToLower()=="true"))
+					{
+					model.<#=c.ColumnName#>= true;
+					}
+					else
+					{
+					model.<#=c.ColumnName#>= false;
+					}
+				}
+				<# } #>
+				<# } #>		
+				
+					modelList.Add(model);
+				}
+			}
+			return modelList;
+		}
+
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		public DataSet GetAllList()
+		{
+			return GetList("");
+		}
+#endregion
+   
+	}
+}

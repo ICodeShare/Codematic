@@ -1,0 +1,47 @@
+﻿<#@ template language="c#" HostSpecific="True" #>
+<#@ output extension= ".cs" #>
+<#
+	TableHost host = (TableHost)(Host);
+	host.Fieldlist.Sort(CodeCommon.CompareByintOrder);
+	ColumnInfo identityKey=host.IdentityKey;
+#>
+数据库名:<#= host.DbName #>
+数据库类型:<#= host.DbType #>
+表名:<#= host.TableName #>
+表描述:<#= host.TableDescription #>
+数据库访问类名:<#= host.DbHelperName #>
+项目名称:<#= host.ProjectName #>
+存储过程前缀:<#= host.ProcPrefix #>
+类命名规则:<#= host.TabNameRule #>
+数据库DbType类名:<#= host.DbParaDbType #>
+存储过程参数符号:<#= host.preParameter #>
+表集合:
+<# foreach (TableInfo tab in host.TableList)
+{
+WriteLine(tab.TabName);
+} #>
+字段集合:
+<# foreach (ColumnInfo c in host.Fieldlist)
+{
+WriteLine("public {0} {1} {{ get; set; }}",CodeCommon.DbTypeToCS(c.TypeName),c.ColumnName );
+} #>
+主键字段集合集合:
+<# foreach (ColumnInfo c in host.Keys)
+{
+WriteLine("public {0} {1} {{ get; set; }}",CodeCommon.DbTypeToCS(c.TypeName),c.ColumnName );
+} #>
+外键字段集合集合:
+<# foreach (ColumnInfo c in host.FKeys)
+{
+WriteLine("public {0} {1} {{ get; set; }}",CodeCommon.DbTypeToCS(c.TypeName),c.ColumnName );
+} #>
+Model类名:<#= host.GetModelClass(host.TableName) #>
+BLL类名:<#= host.GetBLLClass(host.TableName) #>
+DAL类名:<#= host.GetDALClass(host.TableName) #>
+<#= CodeCommon.DbParaDbType(host.DbType) #>
+<#= CodeCommon.preParameter(host.DbType) #>
+<#= CodeCommon.GetWhereParameterExpression(host.Keys,true,host.DbType) #>
+<#= CodeCommon.GetPreParameter(host.Keys,true,host.DbType) #>
+<#= CodeCommon.GetInParameter(host.Keys,true) #>
+<#= CodeCommon.GetFieldstrlist(host.Keys,true) #>
+<#= CodeCommon.GetWhereExpression(host.Keys,true) #>

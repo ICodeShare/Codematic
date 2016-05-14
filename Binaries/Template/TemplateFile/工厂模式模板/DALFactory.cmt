@@ -1,0 +1,80 @@
+﻿<#@ template language="c#" HostSpecific="True" #>
+<#@ output extension= ".cs" #>
+<#
+	TableHost host = (TableHost)(Host);		
+	string ModelSpace = host.NameSpace+".Model."+ host.GetModelClass(host.TableName);
+	ColumnInfo identityKey=host.IdentityKey;
+	string returnValue = "void";
+    if (identityKey!=null)
+    {         
+         returnValue = CodeCommon.DbTypeToCS(identityKey.TypeName);              
+    }
+#>
+using System;
+using System.Reflection;
+using System.Configuration;
+using Maticsoft.IDAL;
+namespace <#= host.NameSpace #>.DALFactory
+{
+	/// <summary>
+	/// 如果在这里创建对象报错，请检查web.config里是否修改了<add key="DAL" value="Maticsoft.SQLServerDAL" />。
+	/// </summary>
+	public sealed partial class DataAccess
+	{
+        private static readonly string AssemblyPath = ConfigurationManager.AppSettings["DAL"];        
+		public DataAccess()
+		{ }
+
+        #region CreateObject 
+
+		//不使用缓存
+        private static object CreateObjectNoCache(string AssemblyPath,string classNamespace)
+		{		
+			try
+			{
+				object objType = Assembly.Load(AssemblyPath).CreateInstance(classNamespace);	
+				return objType;
+			}
+			catch//(System.Exception ex)
+			{
+				//string str=ex.Message;// 记录错误日志
+				return null;
+			}			
+			
+        }
+		//使用缓存
+		private static object CreateObject(string AssemblyPath,string classNamespace)
+		{			
+			object objType = DataCache.GetCache(classNamespace);
+			if (objType == null)
+			{
+				try
+				{
+					objType = Assembly.Load(AssemblyPath).CreateInstance(classNamespace);					
+					DataCache.SetCache(classNamespace, objType);// 写入缓存
+				}
+				catch//(System.Exception ex)
+				{
+					//string str=ex.Message;// 记录错误日志
+				}
+			}
+			return objType;
+		}
+        #endregion
+
+        #region Create<#= host.GetDALClass(host.TableName) #>
+        public static <#= host.NameSpace #>.IDAL.I<#= host.GetDALClass(host.TableName) #> Create<#= host.GetDALClass(host.TableName) #>()
+		{
+			//方式1			
+			//return (<#= host.NameSpace #>.IDAL.I<#= host.GetDALClass(host.TableName) #>)Assembly.Load(AssemblyPath).CreateInstance(AssemblyPath+".<#= host.GetDALClass(host.TableName) #>");
+
+			//方式2 			
+			string classNamespace = AssemblyPath+".<#= host.GetDALClass(host.TableName) #>";	
+			object objType=CreateObject(AssemblyPath,classNamespace);
+            return (<#= host.NameSpace #>.IDAL.I<#= host.GetDALClass(host.TableName) #>)objType;		
+		}
+		#endregion
+             
+        
+    }
+}

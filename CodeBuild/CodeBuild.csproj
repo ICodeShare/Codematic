@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EB6F7AEB-C753-45B7-9378-777AAF5B9BBB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Maticsoft.CodeBuild</RootNamespace>
+    <AssemblyName>Maticsoft.CodeBuild</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Binaries\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualStudio.TextTemplating, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Microsoft.VisualStudio.TextTemplating.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BuilderFactory.cs" />
+    <Compile Include="BuilderFrame.cs" />
+    <Compile Include="BuilderFrameF3.cs" />
+    <Compile Include="BuilderFrameOne.cs" />
+    <Compile Include="BuilderFrameS3.cs" />
+    <Compile Include="BuilderTemp.cs" />
+    <Compile Include="BuilderWebs.cs" />
+    <Compile Include="CodeBuilders.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AddInManager\AddInManager.csproj">
+      <Project>{f2811b43-d66e-4a7c-bfe7-e3d725451a9b}</Project>
+      <Name>AddInManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BuilderModel\BuilderModel.csproj">
+      <Project>{a782f34f-f0a3-4617-bea7-d4b91521e9cf}</Project>
+      <Name>BuilderModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CmConfig\CmConfig.csproj">
+      <Project>{f00cd7b7-d6ba-4d2d-8e63-84915f276d51}</Project>
+      <Name>CmConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeHelper\CodeHelper.csproj">
+      <Project>{af5da0f9-e67d-428c-805a-6cbafeb062bb}</Project>
+      <Name>CodeHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Engine\Engine.csproj">
+      <Project>{a9f6f5fd-0439-45d3-a06a-5dfb0ede4ac0}</Project>
+      <Name>Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBuilder\IBuilder.csproj">
+      <Project>{4ed7f947-7a9d-481c-9e72-6dfd3ec4e349}</Project>
+      <Name>IBuilder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDBO\IDBO.csproj">
+      <Project>{ca3a8685-d520-4373-8d17-ade5d07e7bee}</Project>
+      <Name>IDBO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{0ae16468-e103-48a1-bac6-1782c4ba6911}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Lib\Microsoft.VisualStudio.TextTemplating.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

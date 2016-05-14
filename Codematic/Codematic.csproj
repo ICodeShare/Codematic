@@ -1,0 +1,764 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C7A8A8A6-4CEA-4653-9813-4CC97545EF5F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Codematic</RootNamespace>
+    <AssemblyName>Codematic</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Binaries\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.TextEditor, Version=1.1.0.1913, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\ICSharpCode.TextEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="MagicLibrary, Version=1.7.0.0, Culture=neutral, PublicKeyToken=3a6eb82f876a49bc">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\MagicLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>Lib\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.TextTemplating, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\Microsoft.VisualStudio.TextTemplating.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.9.8\lib\net40\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="PinkieControls, Version=1.0.1259.29927, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\PinkieControls.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SQLite">
+      <HintPath>..\packages\System.Data.SQLite.Core.MSIL.1.0.101.0\lib\net40\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClassView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodeExpTabInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodeExpTabInput.Designer.cs">
+      <DependentUpon>CodeExpTabInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CodeMakerTran.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CodeMakerTran.Designer.cs">
+      <DependentUpon>CodeMakerTran.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommonDialogs\FrmGotoLine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommonDialogs\FrmSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Components\CMTreeNode.cs" />
+    <Compile Include="Components\FormCommon.cs" />
+    <Compile Include="Components\LogInfo.cs" />
+    <Compile Include="Components\ObjHelper.cs" />
+    <Compile Include="Components\SysInfo.cs" />
+    <Compile Include="DbOption.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\DbToWeb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\DbToWeb.Designer.cs">
+      <DependentUpon>DbToWeb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DbTypeSel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DbTypeSel.designer.cs">
+      <DependentUpon>DbTypeSel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DbView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DbView.designer.cs">
+      <DependentUpon>DbView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormAbout.designer.cs">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginMySQL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginMySQL.designer.cs">
+      <DependentUpon>LoginMySQL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginOledb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginOra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginSQLite.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginSQLite.designer.cs">
+      <DependentUpon>LoginSQLite.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewFile.designer.cs">
+      <DependentUpon>NewFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewProject.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewProject.designer.cs">
+      <DependentUpon>NewProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewProjectDB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewProjectSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewProjectSet.designer.cs">
+      <DependentUpon>NewProjectSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OptionFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionFrm.designer.cs">
+      <DependentUpon>OptionFrm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PropertyForm.Designer.cs">
+      <DependentUpon>PropertyForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchTables.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchTables.Designer.cs">
+      <DependentUpon>SearchTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SendErrInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SendErrInfo.designer.cs">
+      <DependentUpon>SendErrInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SolutionExplorer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SplashForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TabPages\CodeEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TabPages\CodeEditor.Designer.cs">
+      <DependentUpon>CodeEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\CodeMaker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TabPages\CodeMaker.Designer.cs">
+      <DependentUpon>CodeMaker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\CodeMakerM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TabPages\CodeMakerM.Designer.cs">
+      <DependentUpon>CodeMakerM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\CodeTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TabPages\CodeTemplate.Designer.cs">
+      <DependentUpon>CodeTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\DataList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TabPages\DataList.Designer.cs">
+      <DependentUpon>DataList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\DbBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TabPages\DbBrowser.Designer.cs">
+      <DependentUpon>DbBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\DbQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TabPages\DbQuery.Designer.cs">
+      <DependentUpon>DbQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\HtmlEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TabPages\HtmlEditor.Designer.cs">
+      <DependentUpon>HtmlEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\IEView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TabPages\IEView.Designer.cs">
+      <DependentUpon>IEView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TabPages\StartPageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TabPages\StartPageForm.Designer.cs">
+      <DependentUpon>StartPageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TemplateBatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TemplateBatch.Designer.cs">
+      <DependentUpon>TemplateBatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TempView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TempView.designer.cs">
+      <DependentUpon>TempView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThreadExceptionHandler.cs" />
+    <Compile Include="Tool\CodeExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\ConverteCS2VB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\DataExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\DbToScript.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\DbToWord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\FrmAddToSnippet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\Loading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\ProjectExp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\ProjectExpadd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\ProjectSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tool\RenameFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserControls\DALTypeAddIn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DALTypeAddIn.Designer.cs">
+      <DependentUpon>DALTypeAddIn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TempNode.cs" />
+    <Compile Include="UserControls\UcAddInManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcAddInManage.Designer.cs">
+      <DependentUpon>UcAddInManage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcCodeView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcCodeView.Designer.cs">
+      <DependentUpon>UcCodeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcCSMyCode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcCSMyCode.Designer.cs">
+      <DependentUpon>UcCSMyCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcCSNameSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcCSNameSet.Designer.cs">
+      <DependentUpon>UcCSNameSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcCSSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcCSSet.Designer.cs">
+      <DependentUpon>UcCSSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcDatatype.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcDatatype.Designer.cs">
+      <DependentUpon>UcDatatype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcDatatypeMap.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcDatatypeMap.Designer.cs">
+      <DependentUpon>UcDatatypeMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcDBSet.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcDBSet.Designer.cs">
+      <DependentUpon>UcDBSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UcOptionEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcOptionsEnviroments.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcOptionsQuerySettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcOptionStartUp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcSysManage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UcSysManage.Designer.cs">
+      <DependentUpon>UcSysManage.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ClassView.resx">
+      <DependentUpon>ClassView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonDialogs\FrmGotoLine.resx">
+      <DependentUpon>FrmGotoLine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommonDialogs\FrmSearch.resx">
+      <DependentUpon>FrmSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DbOption.resx">
+      <DependentUpon>DbOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DbTypeSel.resx">
+      <DependentUpon>DbTypeSel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DbView.resx">
+      <DependentUpon>DbView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormAbout.resx">
+      <DependentUpon>FormAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginMySQL.resx">
+      <DependentUpon>LoginMySQL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginOledb.resx">
+      <DependentUpon>LoginOledb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginOra.resx">
+      <DependentUpon>LoginOra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginSQLite.resx">
+      <DependentUpon>LoginSQLite.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewFile.resx">
+      <DependentUpon>NewFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewProject.resx">
+      <DependentUpon>NewProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewProjectDB.resx">
+      <DependentUpon>NewProjectDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewProjectSet.resx">
+      <DependentUpon>NewProjectSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OptionFrm.resx">
+      <DependentUpon>OptionFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="PropertyForm.resx">
+      <DependentUpon>PropertyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SendErrInfo.resx">
+      <DependentUpon>SendErrInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SolutionExplorer.resx">
+      <DependentUpon>SolutionExplorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashForm.de.resx">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SplashForm.resx">
+      <DependentUpon>SplashForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\CodeEditor.resx">
+      <DependentUpon>CodeEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\CodeMaker.resx">
+      <DependentUpon>CodeMaker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\CodeMakerM.resx">
+      <DependentUpon>CodeMakerM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\CodeTemplate.resx">
+      <DependentUpon>CodeTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\DataList.resx">
+      <DependentUpon>DataList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\DbBrowser.resx">
+      <DependentUpon>DbBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\DbQuery.resx">
+      <DependentUpon>DbQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\HtmlEditor.resx">
+      <DependentUpon>HtmlEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\IEView.resx">
+      <DependentUpon>IEView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TabPages\StartPageForm.resx">
+      <DependentUpon>StartPageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TempView.resx">
+      <DependentUpon>TempView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\CodeExport.resx">
+      <DependentUpon>CodeExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\ConverteCS2VB.resx">
+      <DependentUpon>ConverteCS2VB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\DataExport.resx">
+      <DependentUpon>DataExport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\DbToScript.resx">
+      <DependentUpon>DbToScript.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\DbToWord.resx">
+      <DependentUpon>DbToWord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\FrmAddToSnippet.resx">
+      <DependentUpon>FrmAddToSnippet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\Loading.resx">
+      <DependentUpon>Loading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\ProjectExp.resx">
+      <DependentUpon>ProjectExp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\ProjectExpadd.resx">
+      <DependentUpon>ProjectExpadd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\ProjectSet.resx">
+      <DependentUpon>ProjectSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tool\RenameFrm.resx">
+      <DependentUpon>RenameFrm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DALTypeAddIn.resx">
+      <DependentUpon>DALTypeAddIn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcAddInManage.resx">
+      <DependentUpon>UcAddInManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcCodeView.resx">
+      <DependentUpon>UcCodeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcCSMyCode.resx">
+      <DependentUpon>UcCSMyCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcCSNameSet.resx">
+      <DependentUpon>UcCSNameSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcCSSet.resx">
+      <DependentUpon>UcCSSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcDatatype.resx">
+      <DependentUpon>UcDatatype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcDatatypeMap.resx">
+      <DependentUpon>UcDatatypeMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcDBSet.resx">
+      <DependentUpon>UcDBSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcOptionEditor.resx">
+      <DependentUpon>UcOptionEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcOptionsEnviroments.resx">
+      <DependentUpon>UcOptionsEnviroments.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcOptionsQuerySettings.resx">
+      <DependentUpon>UcOptionsQuerySettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcOptionStartUp.resx">
+      <DependentUpon>UcOptionStartUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UcSysManage.resx">
+      <DependentUpon>UcSysManage.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AddInManager\AddInManager.csproj">
+      <Project>{f2811b43-d66e-4a7c-bfe7-e3d725451a9b}</Project>
+      <Name>AddInManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CmConfig\CmConfig.csproj">
+      <Project>{f00cd7b7-d6ba-4d2d-8e63-84915f276d51}</Project>
+      <Name>CmConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeBuild\CodeBuild.csproj">
+      <Project>{eb6f7aeb-c753-45b7-9378-777aaf5b9bbb}</Project>
+      <Name>CodeBuild</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeHelper\CodeHelper.csproj">
+      <Project>{af5da0f9-e67d-428c-805a-6cbafeb062bb}</Project>
+      <Name>CodeHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ConvertCS2VB\ConvertCS2VB.csproj">
+      <Project>{0143c652-b127-469a-89fd-a8b11a0b9ab5}</Project>
+      <Name>ConvertCS2VB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DBFactory\DBFactory.csproj">
+      <Project>{ca4f70b0-20e9-41c7-8d22-7abdad9d08d7}</Project>
+      <Name>DBFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IBuilder\IBuilder.csproj">
+      <Project>{4ed7f947-7a9d-481c-9e72-6dfd3ec4e349}</Project>
+      <Name>IBuilder</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDBO\IDBO.csproj">
+      <Project>{ca3a8685-d520-4373-8d17-ade5d07e7bee}</Project>
+      <Name>IDBO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LTPTextEditor\LTPTextEditor.csproj">
+      <Project>{8af412ac-4202-4b0c-a255-d480250a07fd}</Project>
+      <Name>LTPTextEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TextEditor\TextEditor.csproj">
+      <Project>{0360d70e-5ab7-4b3f-9a5e-67dab3155fbb}</Project>
+      <Name>TextEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{0ae16468-e103-48a1-bac6-1782c4ba6911}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app.ico" />
+    <Content Include="images\app.ico" />
+    <Content Include="images\loginsql.jpg" />
+    <Content Include="Lib\ICSharpCode.TextEditor.dll" />
+    <Content Include="Lib\MagicLibrary.dll" />
+    <Content Include="Lib\Microsoft.Office.Interop.Word.dll" />
+    <Content Include="Lib\Microsoft.Vbe.Interop.dll" />
+    <Content Include="Lib\Microsoft.VisualStudio.TextTemplating.dll" />
+    <Content Include="Lib\office.dll" />
+    <Content Include="Lib\PinkieControls.dll" />
+    <Content Include="Lib\stdole.dll" />
+    <None Include="Resources\Redo.GIF" />
+    <None Include="Resources\dotNETconnectedtechnology.JPG" />
+    <None Include="Resources\12.JPG" />
+    <None Include="Resources\toolclass.gif" />
+    <None Include="Resources\k.gif" />
+    <None Include="Resources\interface.gif" />
+    <None Include="Resources\cs.gif" />
+    <None Include="Resources\cn.gif" />
+    <None Include="Resources\classf.gif" />
+    <None Include="Resources\class.gif" />
+    <None Include="Resources\xml.gif" />
+    <None Include="Resources\vb.gif" />
+    <None Include="Resources\txt.gif" />
+    <None Include="Resources\te.gif" />
+    <None Include="Resources\s3.gif" />
+    <None Include="Resources\one.gif" />
+    <None Include="Resources\htm.gif" />
+    <None Include="Resources\f3.gif" />
+    <None Include="Resources\cs32.gif" />
+    <None Include="Resources\pa.gif" />
+    <None Include="Resources\j.gif" />
+    <None Include="Resources\delete.gif" />
+    <None Include="Resources\copy.gif" />
+    <None Include="Resources\view.gif" />
+    <None Include="Resources\tab2.gif" />
+    <None Include="Resources\sp_return.gif" />
+    <None Include="Resources\sp_p.gif" />
+    <None Include="Resources\sp.gif" />
+    <None Include="Resources\serverlist.gif" />
+    <None Include="Resources\server1.gif" />
+    <None Include="Resources\server0.gif" />
+    <None Include="Resources\serAdd.gif" />
+    <None Include="Resources\pk.gif" />
+    <None Include="Resources\noconnect.jpg" />
+    <None Include="Resources\noconnect.gif" />
+    <None Include="Resources\fild2.gif" />
+    <None Include="Resources\dbadd.gif" />
+    <None Include="Resources\db.JPG" />
+    <None Include="Resources\db.gif" />
+    <None Include="Resources\temp.png" />
+    <None Include="Resources\xml.ico" />
+    <None Include="Resources\word.ico" />
+    <None Include="Resources\upload.ico" />
+    <None Include="Resources\uninstall.ico" />
+    <None Include="Resources\temp.ico" />
+    <None Include="Resources\SqlQuery.ico" />
+    <None Include="Resources\sql2005.ico" />
+    <None Include="Resources\sql.ico" />
+    <None Include="Resources\oracle.ico" />
+    <None Include="Resources\Network.ico" />
+    <None Include="Resources\help.ico" />
+    <None Include="Resources\file.ico" />
+    <None Include="Resources\Exit.ico" />
+    <None Include="Resources\exec.ico" />
+    <None Include="Resources\computer2.ico" />
+    <None Include="Resources\chat.ico" />
+    <None Include="Resources\toolsln.gif" />
+    <None Include="Resources\toolbox.gif" />
+    <None Include="Resources\toolbar.gif" />
+    <None Include="Resources\toobar4.gif" />
+    <None Include="Resources\toobar3.gif" />
+    <None Include="Resources\toobar2.gif" />
+    <None Include="Resources\tb482.jpg" />
+    <None Include="Resources\tb32.gif" />
+    <None Include="Resources\task.gif" />
+    <None Include="Resources\startpages.gif" />
+    <None Include="Resources\SqlExe.gif" />
+    <None Include="Resources\run.jpg" />
+    <None Include="Resources\run.gif" />
+    <None Include="Resources\rss1.gif" />
+    <None Include="Resources\refrush.gif" />
+    <None Include="Resources\panal.gif" />
+    <None Include="Resources\LOGO1.gif" />
+    <None Include="Resources\logo.jpg" />
+    <None Include="Resources\logo.GIF" />
+    <None Include="Resources\loginsql2.jpg" />
+    <None Include="Resources\list.gif" />
+    <None Include="Resources\help2.gif" />
+    <None Include="Resources\help.gif" />
+    <None Include="Resources\head.jpg" />
+    <None Include="Resources\Folderopen.gif" />
+    <None Include="Resources\Folderclose.gif" />
+    <None Include="Resources\fav.gif" />
+    <None Include="Resources\difu.gif" />
+    <None Include="Resources\dbrow.gif" />
+    <None Include="Resources\codeset.gif" />
+    <None Include="Resources\build.gif" />
+    <None Include="Resources\App0.GIF" />
+    <None Include="Resources\app.gif" />
+    <None Include="Resources\114.GIF" />
+    <None Include="Resources\098.GIF" />
+    <None Include="Resources\app.jpg" />
+    <None Include="Resources\app.ico" />
+    <None Include="Resources\loginsql.jpg" />
+    <None Include="Resources\option.gif" />
+    <None Include="Resources\loginmysql.jpg" />
+    <None Include="Resources\Control.gif" />
+    <None Include="Resources\ajaxloader1.gif" />
+    <None Include="Resources\about3.jpg" />
+    <None Include="Resources\about.gif" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

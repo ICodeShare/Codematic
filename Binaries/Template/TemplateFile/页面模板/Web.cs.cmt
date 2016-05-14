@@ -1,0 +1,50 @@
+﻿<#@ template language="c#" HostSpecific="True" #>
+<#@ output extension= ".cs" #>
+<#
+	TableHost host = (TableHost)(Host);		
+	string ModelSpace = host.NameSpace+".Model."+ host.GetModelClass(host.TableName);
+	string DALSpace= host.NameSpace+".BLL."+ host.GetBLLClass(host.TableName);
+	ColumnInfo identityKey=host.IdentityKey;	
+#>
+
+<# foreach (ColumnInfo c in host.Fieldlist)
+{ #>
+<# if(c.IsIdentity) { continue; } #>
+<# if(CodeCommon.DbTypeToCS(c.TypeName).ToLower()=="string") { #>
+string <#=c.ColumnName#> = txt<#=c.ColumnName#>.Text; <# } #>        
+<# if(CodeCommon.DbTypeToCS(c.TypeName).ToLower()=="int") 
+{         
+WriteLine("int {0} = int.Parse(txt{1}.Text);",c.ColumnName,c.ColumnName ); 
+}
+#>
+<# if(CodeCommon.DbTypeToCS(c.TypeName).ToLower()=="decimal") 
+{
+WriteLine("decimal {0} = decimal.Parse(txt{1}.Text);",c.ColumnName,c.ColumnName );           
+}
+#>
+<# if(CodeCommon.DbTypeToCS(c.TypeName).ToLower()=="bool") 
+{
+WriteLine("bool {0} = chk{1}.Checked;",c.ColumnName,c.ColumnName ); 
+}
+#>
+<# if(CodeCommon.DbTypeToCS(c.TypeName).ToLower()=="datetime") 
+{
+WriteLine("DateTime {0} = DateTime.Parse(txt{1}.Text);",c.ColumnName,c.ColumnName );           
+}
+#>  
+<# if(CodeCommon.DbTypeToCS(c.TypeName).ToLower()=="byte[]") 
+{
+WriteLine("byte[] {0} = byte[].Parse(txt{1}.Text);",c.ColumnName,c.ColumnName );            
+}
+#>  
+<# } #>
+        
+        
+<#=ModelSpace#> model= new <#=ModelSpace#>();
+<# foreach (ColumnInfo c in host.Fieldlist) 
+{ 	        
+ if(c.IsIdentity) { continue; } 
+ WriteLine("model.{0} = {1}; ",c.ColumnName,c.ColumnName );   
+} #>
+bll.Add(model);
+Maticsoft.Common.MessageBox.ShowAndRedirect(this,"保存成功！");	

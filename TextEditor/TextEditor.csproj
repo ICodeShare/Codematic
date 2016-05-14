@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0360D70E-5AB7-4B3F-9A5E-67DAB3155FBB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LTP.TextEditor</RootNamespace>
+    <AssemblyName>LTP.TextEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Binaries\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AbstractMargin.cs" />
+    <Compile Include="Actions\AbstractEditAction.cs" />
+    <Compile Include="Actions\AbstractLineFormatAction.cs" />
+    <Compile Include="Actions\AbstractSelectionFormatAction.cs" />
+    <Compile Include="Actions\Backspace.cs" />
+    <Compile Include="Actions\CapitalizeAction.cs" />
+    <Compile Include="Actions\CaretDown.cs" />
+    <Compile Include="Actions\CaretLeft.cs" />
+    <Compile Include="Actions\CaretRight.cs" />
+    <Compile Include="Actions\CaretUp.cs" />
+    <Compile Include="Actions\ClearAllBookmarks.cs" />
+    <Compile Include="Actions\ClearAllSelections.cs" />
+    <Compile Include="Actions\ConvertLeadingSpacesToTabs.cs" />
+    <Compile Include="Actions\ConvertLeadingTabsToSpaces.cs" />
+    <Compile Include="Actions\ConvertSpacesToTabs.cs" />
+    <Compile Include="Actions\ConvertTabsToSpaces.cs" />
+    <Compile Include="Actions\Copy.cs" />
+    <Compile Include="Actions\Cut.cs" />
+    <Compile Include="Actions\Delete.cs" />
+    <Compile Include="Actions\DeleteLine.cs" />
+    <Compile Include="Actions\DeleteToLineEnd.cs" />
+    <Compile Include="Actions\DeleteWord.cs" />
+    <Compile Include="Actions\End.cs" />
+    <Compile Include="Actions\FormatBuffer.cs" />
+    <Compile Include="Actions\GotoMatchingBrace.cs" />
+    <Compile Include="Actions\GotoNextBookmark.cs" />
+    <Compile Include="Actions\GotoPrevBookmark.cs" />
+    <Compile Include="Actions\Home.cs" />
+    <Compile Include="Actions\IEditAction.cs" />
+    <Compile Include="Actions\IndentSelection.cs" />
+    <Compile Include="Actions\InvertCaseAction.cs" />
+    <Compile Include="Actions\MovePageDown.cs" />
+    <Compile Include="Actions\MovePageUp.cs" />
+    <Compile Include="Actions\MoveToEnd.cs" />
+    <Compile Include="Actions\MoveToStart.cs" />
+    <Compile Include="Actions\Paste.cs" />
+    <Compile Include="Actions\Redo.cs" />
+    <Compile Include="Actions\RemoveLeadingWS.cs" />
+    <Compile Include="Actions\RemoveTrailingWS.cs" />
+    <Compile Include="Actions\Return.cs" />
+    <Compile Include="Actions\ScrollLineDown.cs" />
+    <Compile Include="Actions\ScrollLineUp.cs" />
+    <Compile Include="Actions\SelectWholeDocument.cs" />
+    <Compile Include="Actions\ShiftCaretDown.cs" />
+    <Compile Include="Actions\ShiftCaretLeft.cs" />
+    <Compile Include="Actions\ShiftCaretRight.cs" />
+    <Compile Include="Actions\ShiftCaretUp.cs" />
+    <Compile Include="Actions\ShiftEnd.cs" />
+    <Compile Include="Actions\ShiftHome.cs" />
+    <Compile Include="Actions\ShiftMovePageDown.cs" />
+    <Compile Include="Actions\ShiftMovePageUp.cs" />
+    <Compile Include="Actions\ShiftMoveToEnd.cs" />
+    <Compile Include="Actions\ShiftMoveToStart.cs" />
+    <Compile Include="Actions\ShiftTab.cs" />
+    <Compile Include="Actions\ShiftWordLeft.cs" />
+    <Compile Include="Actions\ShiftWordRight.cs" />
+    <Compile Include="Actions\ShowDefinitionsOnly.cs" />
+    <Compile Include="Actions\Tab.cs" />
+    <Compile Include="Actions\ToggleAllFoldings.cs" />
+    <Compile Include="Actions\ToggleComment.cs" />
+    <Compile Include="Actions\ToggleEditMode.cs" />
+    <Compile Include="Actions\ToggleFolding.cs" />
+    <Compile Include="Actions\ToLowerCase.cs" />
+    <Compile Include="Actions\ToUpperCase.cs" />
+    <Compile Include="Actions\Undo.cs" />
+    <Compile Include="Actions\WordBackspace.cs" />
+    <Compile Include="Actions\WordLeft.cs" />
+    <Compile Include="Actions\WordRight.cs" />
+    <Compile Include="BracketHighlightingSheme.cs" />
+    <Compile Include="BrushRegistry.cs" />
+    <Compile Include="Caret.cs" />
+    <Compile Include="CaretMode.cs" />
+    <Compile Include="CopyTextEventArgs.cs" />
+    <Compile Include="CopyTextEventHandler.cs" />
+    <Compile Include="DialogKeyProcessor.cs" />
+    <Compile Include="Document\AbstractSegment.cs" />
+    <Compile Include="Document\BookmarkManager.cs" />
+    <Compile Include="Document\BookmarkManagerMemento.cs" />
+    <Compile Include="Document\BracketHighlightingStyle.cs" />
+    <Compile Include="Document\BracketMatchingStyle.cs" />
+    <Compile Include="Document\ColumnRange.cs" />
+    <Compile Include="Document\CustomLine.cs" />
+    <Compile Include="Document\CustomLineManager.cs" />
+    <Compile Include="Document\DefaultDocument.cs" />
+    <Compile Include="Document\DefaultFormattingStrategy.cs" />
+    <Compile Include="Document\DefaultHighlightingStrategy.cs" />
+    <Compile Include="Document\DefaultLineManager.cs" />
+    <Compile Include="Document\DefaultSelection.cs" />
+    <Compile Include="Document\DefaultTextEditorProperties.cs" />
+    <Compile Include="Document\DocumentEventArgs.cs" />
+    <Compile Include="Document\DocumentEventHandler.cs" />
+    <Compile Include="Document\DocumentFactory.cs" />
+    <Compile Include="Document\DocumentSelectionMode.cs" />
+    <Compile Include="Document\FileSyntaxModeProvider.cs" />
+    <Compile Include="Document\FoldingManager.cs" />
+    <Compile Include="Document\FoldMarker.cs" />
+    <Compile Include="Document\FoldType.cs" />
+    <Compile Include="Document\FontContainer.cs" />
+    <Compile Include="Document\GapTextBufferStrategy.cs" />
+    <Compile Include="Document\HighlightBackground.cs" />
+    <Compile Include="Document\HighlightColor.cs" />
+    <Compile Include="Document\HighlightInfo.cs" />
+    <Compile Include="Document\HighlightingColorNotFoundException.cs" />
+    <Compile Include="Document\HighlightingDefinitionParser.cs" />
+    <Compile Include="Document\HighlightingManager.cs" />
+    <Compile Include="Document\HighlightingStrategyFactory.cs" />
+    <Compile Include="Document\HighlightRuleSet.cs" />
+    <Compile Include="Document\IBookMarkManager.cs" />
+    <Compile Include="Document\ICustomLineManager.cs" />
+    <Compile Include="Document\IDocument.cs" />
+    <Compile Include="Document\IFoldingStrategy.cs" />
+    <Compile Include="Document\IFormattingStrategy.cs" />
+    <Compile Include="Document\IHighlightingStrategy.cs" />
+    <Compile Include="Document\ILineManager.cs" />
+    <Compile Include="Document\IndentStyle.cs" />
+    <Compile Include="Document\ISegment.cs" />
+    <Compile Include="Document\ISelection.cs" />
+    <Compile Include="Document\ISyntaxModeFileProvider.cs" />
+    <Compile Include="Document\ITextBufferStrategy.cs" />
+    <Compile Include="Document\ITextEditorProperties.cs" />
+    <Compile Include="Document\LineLengthEventArgs.cs" />
+    <Compile Include="Document\LineLengthEventHandler.cs" />
+    <Compile Include="Document\LineManagerEventArgs.cs" />
+    <Compile Include="Document\LineManagerEventHandler.cs" />
+    <Compile Include="Document\LineSegment.cs" />
+    <Compile Include="Document\LineViewerStyle.cs" />
+    <Compile Include="Document\MarkerStrategy.cs" />
+    <Compile Include="Document\NextMarker.cs" />
+    <Compile Include="Document\ParserFoldingStrategy.cs" />
+    <Compile Include="Document\PrevMarker.cs" />
+    <Compile Include="Document\ResourceSyntaxModeProvider.cs" />
+    <Compile Include="Document\SelectionCollection.cs" />
+    <Compile Include="Document\SelectionManager.cs" />
+    <Compile Include="Document\Span.cs" />
+    <Compile Include="Document\StringTextBufferStrategy.cs" />
+    <Compile Include="Document\SyntaxMode.cs" />
+    <Compile Include="Document\TextMarker.cs" />
+    <Compile Include="Document\TextMarkerType.cs" />
+    <Compile Include="Document\TextUtilities.cs" />
+    <Compile Include="Document\TextWord.cs" />
+    <Compile Include="Document\TextWordType.cs" />
+    <Compile Include="FoldMargin.cs" />
+    <Compile Include="Gui\CompletionWindow\AbstractCompletionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\CompletionWindow\CodeCompletionListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Gui\CompletionWindow\CodeCompletionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\CompletionWindow\DeclarationViewWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Gui\CompletionWindow\ICompletionData.cs" />
+    <Compile Include="Gui\CompletionWindow\ICompletionDataProvider.cs" />
+    <Compile Include="Gui\CompletionWindow\IDeclarationViewWindow.cs" />
+    <Compile Include="Gui\InsightWindow\IInsightDataProvider.cs" />
+    <Compile Include="Gui\InsightWindow\InsightWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GutterMargin.cs" />
+    <Compile Include="Highlight.cs" />
+    <Compile Include="HRuler.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="IconBarMargin.cs" />
+    <Compile Include="Ime.cs" />
+    <Compile Include="KeyEventHandler.cs" />
+    <Compile Include="MarginMouseEventHandler.cs" />
+    <Compile Include="MarginPaintEventHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TextArea.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TextAreaClipboardHandler.cs" />
+    <Compile Include="TextAreaControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TextAreaDragDropHandler.cs" />
+    <Compile Include="TextAreaMouseHandler.cs" />
+    <Compile Include="TextAreaUpdate.cs" />
+    <Compile Include="TextAreaUpdateType.cs" />
+    <Compile Include="TextEditorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TextEditorControlBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TextView.cs" />
+    <Compile Include="Undo\IUndoableOperation.cs" />
+    <Compile Include="Undo\UndoableDelete.cs" />
+    <Compile Include="Undo\UndoableInsert.cs" />
+    <Compile Include="Undo\UndoableReplace.cs" />
+    <Compile Include="Undo\UndoQueue.cs" />
+    <Compile Include="Undo\UndoStack.cs" />
+    <Compile Include="Util\CountTipText.cs" />
+    <Compile Include="Util\LookupTable.cs" />
+    <Compile Include="Util\RtfWriter.cs" />
+    <Compile Include="Util\TextUtility.cs" />
+    <Compile Include="Util\TipPainter.cs" />
+    <Compile Include="Util\TipPainterTools.cs" />
+    <Compile Include="Util\TipSection.cs" />
+    <Compile Include="Util\TipSpacer.cs" />
+    <Compile Include="Util\TipSplitter.cs" />
+    <Compile Include="Util\TipText.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

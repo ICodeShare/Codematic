@@ -1,0 +1,34 @@
+﻿<#@ template language="c#" HostSpecific="True" #>
+<#@ output extension= ".cs" #>
+<#
+	TableHost host = (TableHost)(Host);
+	host.Fieldlist.Sort(CodeCommon.CompareByintOrder);
+#>
+using System;
+
+//Nhibernate Code Generation Template 1.0
+//author:MythXin
+//blog:www.cnblogs.com/MythXin
+//Entity Code Generation Template
+namespace <#= host.NameSpace #>.Entity<# if( host.Folder.Length > 0) {#>.<#= host.Folder #><# } #>
+{
+	<# if( host.TableDescription.Length > 0) {#>
+ 	//<#= host.TableDescription #>
+	<# } #>
+	public class <#= host.GetModelClass(host.TableName) #>
+	{
+	
+      	<# foreach (ColumnInfo c in host.Fieldlist)
+		{ #>/// <summary>
+		/// <#= string.IsNullOrEmpty(c.Description)  ? c.ColumnName : c.Description #>
+        /// </summary>
+        public virtual <#= CodeCommon.DbTypeToCS(c.TypeName) #><# if(c.Nullable) {  #><#if(CodeCommon.isValueType(CodeCommon.DbTypeToCS(c.TypeName
+))){ #>?<# }#><# }#> <#= c.ColumnName #>
+        {
+            get; 
+            set; 
+        }        
+		<# } #>
+   
+	}
+}

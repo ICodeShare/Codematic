@@ -1,0 +1,60 @@
+﻿<#@ template language="c#" HostSpecific="True" #>
+<#@ output extension= ".cs" #>
+<#
+	TableHost host = (TableHost)(Host);		
+	string ModelSpace = host.NameSpace+".Model."+ host.GetModelClass(host.TableName);
+	ColumnInfo identityKey=host.IdentityKey;
+	string returnValue = "void";
+    if (identityKey!=null)
+    {         
+         returnValue = CodeCommon.DbTypeToCS(identityKey.TypeName);              
+    }
+#>
+using System;
+using System.Data;
+namespace <#= host.NameSpace #>.IDAL <# if( host.Folder.Length > 0){ #>.<#= host.Folder #><# } #>
+{
+	/// <summary>
+	/// 接口层<#= host.GetDALClass(host.TableName) #>
+	/// </summary>
+	public interface I<#= host.GetDALClass(host.TableName) #>
+	{
+		#region  成员方法
+		/// <summary>
+		/// 是否存在该记录
+		/// </summary>
+		bool Exists(<#= CodeCommon.GetInParameter(host.Keys, false) #>);
+		/// <summary>
+		/// 增加一条数据
+		/// </summary>
+		<#= returnValue #>  Add(<#= ModelSpace #> model);
+		/// <summary>
+		/// 更新一条数据
+		/// </summary>
+		bool Update(<#= ModelSpace #> model);
+		/// <summary>
+		/// 删除数据
+		/// </summary>
+		bool Delete(<#=CodeCommon.GetInParameter(host.Keys, true)#>);
+		<#if (identityKey!=null) {#>
+		bool DeleteList(string <#=identityKey.ColumnName#>list );
+		<#}#>
+		/// <summary>
+		/// 得到一个对象实体
+		/// </summary>
+		<#= ModelSpace #> GetModel(<#= CodeCommon.GetInParameter(host.Keys,true) #>);
+		/// <summary>
+		/// 获得数据列表
+		/// </summary>
+		DataSet GetList(string strWhere);
+		/// <summary>
+		/// 获得前几行数据
+		/// </summary>
+		DataSet GetList(int Top,string strWhere,string filedOrder);
+		/// <summary>
+		/// 根据分页获得数据列表
+		/// </summary>
+		//DataSet GetList(int PageSize,int PageIndex,string strWhere);
+		#endregion  成员方法
+	} 
+}

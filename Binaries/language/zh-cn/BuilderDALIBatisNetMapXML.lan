@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<cfg>
+	<msg key="summary" value="数据访问类"  />
+    <msg key="summaryGetMaxId" value="得到最大ID"  />
+    <msg key="summaryExists" value="是否存在该记录"  />
+    <msg key="summaryadd" value="增加一条数据"  />
+    <msg key="summaryUpdate" value="更新一条数据"  />
+    <msg key="summaryDelete" value="删除一条数据"  />
+    <msg key="summaryDeletelist" value="批量删除数据"  />
+    <msg key="summaryGetModel" value="得到一个对象实体"  />
+    <msg key="summaryGetList" value="获得数据列表"  />
+    <msg key="summaryGetList2" value="获得前几行数据"  />
+    <msg key="summaryGetList3" value="分页获取数据列表"  />
+</cfg>

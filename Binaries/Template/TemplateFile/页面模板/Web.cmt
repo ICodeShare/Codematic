@@ -1,0 +1,29 @@
+﻿<#@ template language="c#" HostSpecific="True" #>
+<#@ output extension= ".aspx" #>
+<#
+	TableHost host = (TableHost)(Host);		
+	string ModelSpace = host.NameSpace+".Model."+ host.GetModelClass(host.TableName);
+	string DALSpace= host.NameSpace+".BLL."+ host.GetBLLClass(host.TableName);
+	ColumnInfo identityKey=host.IdentityKey;	
+#>
+
+		<!-- Add.aspx -->
+
+		<table cellSpacing="0" cellPadding="0" width="100%" border="0">
+		<# foreach (ColumnInfo c in host.Fieldlist)
+		{ #>
+		<tr><td height="25" width="30%" align="right">		
+		 <#= c.Description == "" ? c.ColumnName : c.Description #>：</td>
+        <td height="25" width="*" align="left">
+        <# if(CodeCommon.DbTypeToCS(c.TypeName)=="datetime") { #>
+        <asp:TextBox ID="txt<#= c.ColumnName #>" runat="server" Width="70px"  onfocus="setday(this)"></asp:TextBox>
+        <#} else #>
+        <# if(CodeCommon.DbTypeToCS(c.TypeName)=="bool") { #>
+        <asp:CheckBox ID="chk<#= c.ColumnName #>" Text="<#= c.Description #>" runat="server" Checked="False" />
+        <#} else #>
+        <# { #>
+        <asp:TextBox id="txt<#= c.ColumnName #>" runat="server" Width="200px"></asp:TextBox>
+        <#}#>     
+        </td></tr>
+		<# } #>
+		<script src="/js/calendar1.js" type="text/javascript"></script>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<cfg>
+	<msg key="SoftName" value="动软代码生成器"  />
+    <msg key="DBView" value="数据库视图"  />
+    <msg key="TempView" value="模版管理"  />
+    <msg key="UpdateTip1" value="程序发现新版本，你想现在升级吗？"  />
+    <msg key="UpdateTip2" value="系统提示"  />
+    <msg key="Finish" value="完成"  />
+    <msg key="StartPage" value="起始页"  />
+    <msg key="Save" value="保存"  />
+    <msg key="Close" value="关闭"  />
+    <msg key="CloseAll" value="除此之外全部关闭"  />
+    <msg key="SaveSQL" value="保存当前查询"  />
+    <msg key="SaveCode" value="保存当前代码"  />
+    <msg key="Summary" value="摘要"  />
+    <msg key="File" value="文件"  />
+    <msg key="Edit" value="编辑"  />
+    <msg key="Project" value="项目"  />
+    <msg key="New" value="新建"  />
+    <msg key="DBConnect" value="数据库连接"  />
+    <msg key="Open" value="打开"  />
+    <msg key="SaveAS" value="保存为"  />
+    <msg key="Exit" value="退出"  />
+    <msg key="View" value="视图"  />
+    <msg key="ServerManager" value="服务器资源管理器"  />
+    <msg key="TempManager" value="模版管理器"  />
+    <msg key="SolutionManager" value="解决方案资源管理器"  />
+    <msg key="ClassView" value="类视图"  />
+    <msg key="DBManager" value="数据库管理器"  />
+    <msg key="Restore" value="恢复"  />
+    <msg key="Cut" value="剪切"  />
+    <msg key="Copy" value="复制"  />
+    <msg key="Paste" value="粘贴"  />
+    <msg key="Delete" value="删除"  />
+    <msg key="SelectAll" value="全选"  />
+    <msg key="Find" value="查找"  />
+    <msg key="FindNext" value="查找下一个"  />
+    <msg key="Replace" value="替换"  />
+    <msg key="GotoLine" value="转到行"  />
+    <msg key="Query" value="查询"  />
+    <msg key="OpenSql" value="打开脚本..."  />
+    <msg key="SaveSql" value="保存脚本..."  />
+    <msg key="RunSql" value="运行当前查询"  />
+    <msg key="StopSql" value="停止查询"  />  
+
+</cfg>
+
+
+
+
+

@@ -1,0 +1,35 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension= ".hbm.xml"  #>
+<#
+	TableHost host = (TableHost)(Host);
+	host.Fieldlist.Sort(CodeCommon.CompareByintOrder);
+	
+//Nhibernate 代码自动生成模板 1.0
+//作者:MythXin
+//blog:www.cnblogs.com/MythXin
+//XML映射代码自动生成模板
+#>
+<?xml version="1.0"  encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="<#= host.NameSpace #>" namespace="<#= host.NameSpace #>">
+	<class name="<#= host.NameSpace #>.Entity<# if( host.Folder.Length > 0) {#>.<#= host.Folder #><# } #>.<#= host.GetModelClass(host.TableName) #>, <#= host.NameSpace #>" table="<#= host.TableName #>">
+		<# if(host.Keys.Count>1) 
+			{ #><composite-id>
+        		<# foreach (ColumnInfo k in host.Keys){ 
+        		#><key-property name="<#= k.ColumnName #>" column="<#= k.ColumnName #>" type="<#= CodeCommon.DbTypeToCS(k.TypeName) #>" <#
+					if(k.IsIdentity){ #> insert="false" update="false"<# } #> />
+				<# } #>
+			
+		</composite-id>
+		<# } else if (host.Keys.Count==1)
+		{ #><id name="<#= host.Keys[0].ColumnName #>" column="<#= host.Keys[0].ColumnName #>" type="<#= CodeCommon.DbTypeToCS(host.Keys[0].TypeName) #>" unsaved-value="0">
+      			<# if(host.Keys[0].IsIdentity) { #><generator class="native" /> <# } #>
+      			
+      	</id><# } #>
+      		
+		<# foreach (ColumnInfo c in host.Fieldlist)
+		{ #><# if(!c.IsPrimaryKey){ #><property name="<#= c.ColumnName #>" column="<#= c.ColumnName #>" type="<#= CodeCommon.DbTypeToCS(c.TypeName) #>" <# 
+		if(c.IsIdentity){ #> insert="false" update="false"<# } #> />
+		<# } #><# } #>
+		
+	</class>
+</hibernate-mapping>

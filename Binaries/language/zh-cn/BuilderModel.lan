@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<cfg>
+	<msg key="summary" value="实体类(属性说明自动提取数据库字段的描述信息)"  />
+
+</cfg>

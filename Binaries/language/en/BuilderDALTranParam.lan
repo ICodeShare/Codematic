@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="gb2312" ?>
+<cfg>
+	<msg key="summary" value="Data access"  />
+    <msg key="summaryGetMaxId" value="Get the maximum ID"  />
+    <msg key="summaryExists" value="Whether there is Exists"  />
+    <msg key="summaryadd" value="Add a record"  />
+    <msg key="summaryUpdate" value="Update a record"  />
+    <msg key="summaryDelete" value="Delete a record"  />
+    <msg key="summaryDeletelist" value="Delete record"  />
+    <msg key="summaryGetModel" value="Get an object entity"  />
+    <msg key="summaryGetList" value="Query data list"  />
+    <msg key="summaryGetList2" value="Query top lines of data "  />
+    <msg key="summaryGetList3" value="Paging data list"  />
+</cfg>
