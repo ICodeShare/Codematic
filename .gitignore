@@ -1,4 +1,4 @@
-Thumbs.db
+﻿Thumbs.db
 *.obj
 *.exe
 *.pdb
@@ -27,3 +27,5 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 *.vssscc
 $tf*/
+/.vs/Codematic/v15/Server/sqlite3
+Binaries/
